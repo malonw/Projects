@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Locations</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="/css/style.css">
 
@@ -17,40 +17,25 @@
 </header>
 
 <div class="container">
-<h1>Create an Item</h1>
+<h1>Create an Location</h1>
 <hr>
 	<div class="form-group">
-		<form:form method ="POST" action="/admin/new" modelAttribute="item">
+		<form:form method ="POST" action="/admin/addLocation" modelAttribute="location">
 			<div class="form-control">
 				<form:label path="name">Item Name:</form:label>
 				<form:errors class="errors"  path="name"/>
 				<form:input type="text" path="name"/>
 			</div>
-			<div class="form-control">
-				<form:label path="description">Description:</form:label>
-				<form:errors class="errors"  path="description"/>
-				<form:textarea type="text" path="description" />
-			</div>
-			<div class="form-control">
-				<form:label path="roomItemIsIn">Location</form:label>
-				<form:select path="roomItemIsIn">
-					<c:forEach items="${allLocations}" var="all">
-						<option value="${all.id}">${all.name}</option>
-					</c:forEach>
-				</form:select>
-			</div>
-			
-			<div class="form-control">
-				<form:label path="value">Value:$</form:label>
-				<form:errors class="errors"  path="value"/>
-				<form:input type="number" path="value" />
-			</div>
-			<div class="form-control">
-				<p>Upload Images on Edit Page</p>
-			</div>
-			<button class= "btn btn-success">Create Item</button>
+			<button>Create Location</button>
 		</form:form>
 	</div>
+	<hr>
+	<h4>Locations</h4>
+	<ul>
+		<c:forEach items="${allLocations}" var="all">
+			<li>${all.name}</li>
+		</c:forEach>
+	</ul>
 </div>
 
 </body>

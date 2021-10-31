@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.malonwright.DisneyCollection.models.Item;
+
 import com.malonwright.DisneyCollection.models.Location;
 import com.malonwright.DisneyCollection.repositories.LocationRepository;
 
@@ -26,7 +26,7 @@ public class LocationService {
 		}
 		
 		//Create Location
-		public Location create(Location location) {
+		public Location createLocation(Location location) {
 			return this.lRepo.save(location);
 		}
 }

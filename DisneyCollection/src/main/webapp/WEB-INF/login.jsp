@@ -5,10 +5,15 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Login Page</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-<header><a href="/registration">Register Here</a></header>
+<div class="container">
+
+<header><a href="/registration">Register Here</a>
+
+</header>
 <p class="error">${logout}</p>
     <h1>Login</h1>
     
@@ -26,5 +31,6 @@
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <input type="submit" value="Login!"/>
     </form>
+    </div>
 </body>
 </html>

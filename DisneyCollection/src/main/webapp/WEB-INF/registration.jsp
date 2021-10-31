@@ -8,11 +8,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Registration Page</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+
 </head>
 <body>
+<div class="container">
     <h1>Register!</h1>
-    
-    <p><form:errors path="user.*"/></p>
+<hr>    
+    <p><form:errors class="errors" path="user.*"/></p>
     
     <form:form method="POST" action="/registration" modelAttribute="user">
         <p>
@@ -29,5 +33,8 @@
         </p>
         <input type="submit" value="Register!"/>
     </form:form>
+   <hr>
+
+</div>
 </body>
 </html>

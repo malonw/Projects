@@ -6,11 +6,9 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import com.malonwright.DisneyCollection.models.Item;
+import com.malonwright.DisneyCollection.models.Picture;
 
 @Repository
-public interface ItemRepository extends CrudRepository<Item, Long> {
-	
-	List<Item> findAll();
-	
-//	List<Item> findByAllByOrderByLocationDesc();
+public interface PictureRepository extends CrudRepository<Picture, Long> {
+	List<Picture> findAllByItem(Item item);
 }

@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="locations")
@@ -18,12 +20,14 @@ public class Location {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
+	@NotBlank
+	@Size(min=3, message= "Name must be greater than 3 characters")
 	private String name;
 	
 	@OneToMany(mappedBy="roomItemIsIn", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private List<Item> items;
 	
-	private Location() {
+	public Location() {
 		
 	}
 

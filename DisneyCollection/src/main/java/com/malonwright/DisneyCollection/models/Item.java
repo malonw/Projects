@@ -3,6 +3,7 @@ package com.malonwright.DisneyCollection.models;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,12 +14,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.sun.istack.NotNull;
 
 @Entity
 @Table(name="items")
@@ -34,17 +37,25 @@ public class Item {
 	@NotNull
 	private float value;
 	
-	private String comment;
-	private String base64Image;
 	
 	@Column(updatable=false)
 	private Date createdAt;
 	private Date updatedAt;
+
+	// Between Items and Pictures
+	@OneToMany(mappedBy="item", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	private List<Picture> pics;
 	
+	//Between Items and Comments
+	@OneToMany(mappedBy="item", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	private List<Comment> comments;
+	
+	//Between Items and Locations
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="item_id")
+	@JoinColumn(name="location_id")
 	private Location roomItemIsIn;
 	
+	//Between Items and Users for Like unlike
 	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(
 			name="likes",
@@ -52,6 +63,7 @@ public class Item {
 			inverseJoinColumns = @JoinColumn(name="user_id")
 			)
 	private List<User> likers;
+	
 	
 	@PrePersist
 	protected void onCreate() {
@@ -88,18 +100,6 @@ public class Item {
 	public void setValue(float value) {
 		this.value = value;
 	}
-	public String getComment() {
-		return comment;
-	}
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
-	public String getBase64Image() {
-		return base64Image;
-	}
-	public void setBase64Image(String base64Image) {
-		this.base64Image = base64Image;
-	}
 	public Date getCreatedAt() {
 		return createdAt;
 	}
@@ -123,6 +123,19 @@ public class Item {
 	}
 	public void setLikers(List<User> likers) {
 		this.likers = likers;
+	}
+
+	public List<Picture> getPics() {
+		return pics;
+	}
+	public void setPics(List<Picture> pics) {
+		this.pics = pics;
+	}
+	public List<Comment> getComments() {
+		return comments;
+	}
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
 	}
 	
 }

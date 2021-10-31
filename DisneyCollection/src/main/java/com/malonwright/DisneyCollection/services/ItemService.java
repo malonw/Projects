@@ -45,7 +45,7 @@ public class ItemService {
 	//Unlike an Item
 	public void unlikeItem(User user, Item item) {
 		List<User> usersWhoLiked = item.getLikers();
-		usersWhoLiked.add(user);
+		usersWhoLiked.remove(user);
 		this.iRepo.save(item);
 	}
 }

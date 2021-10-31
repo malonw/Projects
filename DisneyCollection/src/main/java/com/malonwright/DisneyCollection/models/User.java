@@ -3,6 +3,7 @@ package com.malonwright.DisneyCollection.models;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -35,7 +37,11 @@ public class User {
 	private Date createdAt;
 	private Date updatedAt;
 	
+	//Between User and Comments
+	@OneToMany(mappedBy="author", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	private List<Comment> comments;
 	
+	//Users and Roles
 	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(
 			name="users_roles",
@@ -43,6 +49,7 @@ public class User {
 			inverseJoinColumns=@JoinColumn(name="role_id"))
 	private List<Role> roles;
 	
+	//Users and Items for Like Unlike
 	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(
 			name="likes",
@@ -124,6 +131,12 @@ public class User {
 	}
 	public void setItemsLiked(List<Item> itemsLiked) {
 		this.itemsLiked = itemsLiked;
+	}
+	public List<Comment> getComments() {
+		return comments;
+	}
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
 	}
 
 }

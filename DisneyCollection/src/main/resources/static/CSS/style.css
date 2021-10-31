@@ -3,3 +3,25 @@
 .error {
 	color: red;
 }
+header{
+	display:flex;
+	justify-content:space-around;
+	background-color:white;
+}
+.home{
+	background-size: 100%;
+    background-image: url(/images/WDWCastle.jpg);
+}
+.adminHome{
+	color: white;
+}
+.details{
+	display:flex;
+}
+.details img{
+	margin-right:1em;
+}
+.imagePlace{
+	height:50%;
+	width:50%;
+}
