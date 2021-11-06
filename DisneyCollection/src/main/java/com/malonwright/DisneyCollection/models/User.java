@@ -18,6 +18,8 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 
 
@@ -28,10 +30,14 @@ public class User {
 	@Id
 	@GeneratedValue (strategy=GenerationType.IDENTITY)
 	private Long id;
+	@NotBlank
 	private String username;
+	@NotBlank
+	@Size(min=8, message="Must be greater than eight characters")
 	private String password;
 	
 	@Transient
+	@NotBlank
 	private String passwordConfirmation;
 	@Column(updatable=false)
 	private Date createdAt;

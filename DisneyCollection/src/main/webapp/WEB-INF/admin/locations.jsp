@@ -11,32 +11,39 @@
 <link rel="stylesheet" type="text/css" href="/css/style.css">
 
 </head>
-<body>
-<header><a href="/admin">Admin Home Page</a>
-<a href="/dashboard">User Home Page</a>
+<body class="locations">
+<header>
+	<a href="/admin">Admin Home Page</a>
+	<a href="/dashboard">User Home Page</a>
 </header>
 
 <div class="container">
-<h1>Create an Location</h1>
-<hr>
-	<div class="form-group">
-		<form:form method ="POST" action="/admin/addLocation" modelAttribute="location">
-			<div class="form-control">
-				<form:label path="name">Item Name:</form:label>
-				<form:errors class="errors"  path="name"/>
-				<form:input type="text" path="name"/>
-			</div>
-			<button>Create Location</button>
-		</form:form>
-	</div>
+	<h1>Create an Location</h1>
 	<hr>
-	<h4>Locations</h4>
-	<ul>
-		<c:forEach items="${allLocations}" var="all">
-			<li>${all.name}</li>
-		</c:forEach>
-	</ul>
+	<div class="row">
+		<div class="col-md-3">
+		
+			<div class="form-group">
+				<form:form method ="POST" action="/admin/addLocation" modelAttribute="location">
+					<div class="form-control">
+						<form:label path="name">Item Name:</form:label>
+						<form:errors class="errors"  path="name"/>
+						<form:input type="text" path="name"/>
+					</div>
+					<button>Create Location</button>
+				</form:form>
+			</div>
+		</div>
+		<div class="col-md-6">
+		
+			<h4>Locations</h4>
+			<ul>
+				<c:forEach items="${allLocations}" var="all">
+					<li>${all.name}</li>
+				</c:forEach>
+			</ul>
+		</div>
+	</div>
 </div>
-
 </body>
 </html>

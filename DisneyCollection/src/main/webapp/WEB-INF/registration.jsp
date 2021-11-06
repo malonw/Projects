@@ -17,13 +17,14 @@
     <h1>Register!</h1>
 <hr>    
     <p><form:errors class="errors" path="user.*"/></p>
-    
+    <p>${message}</p>
     <form:form method="POST" action="/registration" modelAttribute="user">
         <p>
             <form:label path="username">Username:</form:label>
             <form:input path="username"/>
         </p>
         <p>
+        
             <form:label path="password">Password:</form:label>
             <form:password path="password"/>
         </p>

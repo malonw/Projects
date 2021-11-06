@@ -12,8 +12,33 @@ header{
 	background-size: 100%;
     background-image: url(/images/WDWCastle.jpg);
 }
+.users{
+	background-size:100%;
+	background-image: url(/images/disneybckgrnd.jpg);
+	color:white;
+}
 .adminHome{
 	color: white;
+}
+.addItem{
+	background-size:100%;
+	background-image: url(/images/waltcastle.jpg);
+	color:white;
+}
+.editItem{
+	background-size:100%;
+	background-image: url(/images/watershow.jpg);
+	color:white;
+}
+.AdminHome{
+	background-size:100%;
+	background-image: url(/images/characters.jpg);
+	color:white;
+}
+.locations{
+	background-image: url(/images/AllCharacters.jpg);
+	background-size:100%;
+	color:white;
 }
 .details{
 	display:flex;
@@ -21,7 +46,18 @@ header{
 .details img{
 	margin-right:1em;
 }
+.ItemDetails{
+	background-image: url(/images/cloud.jpg);
+	background-size:100%;
+	color:black;
+}
 .imagePlace{
 	height:50%;
 	width:50%;
+}
+th{
+	    vertical-align: middle;
+}
+.comments p{
+	margin-left:1em;
 }

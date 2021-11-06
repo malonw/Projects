@@ -1,5 +1,8 @@
 package com.malonwright.DisneyCollection.services;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -37,4 +40,26 @@ public class UserService {
     public User findByUsername(String username) {
         return uRepo.findByUsername(username);
     }
+    //find all users
+    public List<User> getAllUsers(){
+    	return this.uRepo.findAll();
+    }
+    //Get One user
+    public Optional<User> getOneUser(Long id) {
+    	return this.uRepo.findById(id);
+    }
+  //Sort User Name Up
+  	public List<User> sortAsc(User user) {
+  		return this.uRepo.findByOrderByUsernameAsc();
+  	}
+  	
+  	//Sort User Name Down
+  	public List<User> sortDesc(User user) {
+  		return this.uRepo.findByOrderByUsernameDesc();
+  	}
+    //Delete User
+    public void deleteUser(Long id) {
+    	this.uRepo.deleteById(id);
+    }
+    
 }

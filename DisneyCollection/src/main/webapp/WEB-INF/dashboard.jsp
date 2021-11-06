@@ -7,6 +7,7 @@
 <meta charset="ISO-8859-1">
 <title>Welcome Page</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="/css/style.css">
 
 </head>
@@ -22,19 +23,19 @@
 
     <h1>Welcome, ${user.username}</h1>
     <hr>
-    <table class ="table table-striped table-light">
+    <table class ="table table-striped table-light table-bordered table-sm">
     	<thead>
     		<tr>
-    			<th>Number of Likes</th>
-   				<th>Item Name</th>
-    			<th>Item Location</th>
+    			<th>Number of Likes <!--  <a class= "btn btn-light" href="/sort/LikesUp" ><span>&#8607;</span></a><a class="btn btn-light" href="/sort/LikesDown"> <span>&#8609;</span></a> --></th>
+   				<th >Item Name  <a class= "btn btn-light" href="/sort/itemUp" ><span>&#8607;</span></a><a class="btn btn-light" href="/sort/itemDown"> <span>&#8609;</span></a></th>
+    			<th>Item Location  <a class= "btn btn-light" href="/sort/locationUp" ><span>&#8607;</span></a><a class="btn btn-light" href="/sort/locationDown"> <span>&#8609;</span></a></th>
     			<th>Action</th>
     		</tr>
     	</thead>
     	<tbody>
     	<c:forEach items="${allItems}" var="item">
     		<tr>
-    			<td>${item.likers.size()}</td>
+    			<td>${item.likers.size()} </td>
     			<td><a href="/details/${item.id}">${item.name}</a></td>
     			<td>${item.roomItemIsIn.name}</td>
     			<td>

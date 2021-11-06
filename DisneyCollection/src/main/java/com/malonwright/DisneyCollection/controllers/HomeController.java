@@ -49,6 +49,8 @@ public class HomeController {
 	@Autowired
 	private CommentService cService;
 	
+	
+	
 	private static String UPLOADED_FOLDER ="src/main/resources/static/images/";
 	
 	@GetMapping("/login")
@@ -77,7 +79,7 @@ public class HomeController {
 		return "redirect:/login";
 	}
 	
-	
+	//Dashboard
 	@GetMapping(value = {"/", "/dashboard"})
     public String home(Principal principal, Model viewModel) {
         
@@ -86,6 +88,45 @@ public class HomeController {
         viewModel.addAttribute("allItems", this.iService.getAllItems());
         return "dashboard.jsp";
     }
+	
+	//Sort By Item Ascending
+	@GetMapping("/sort/itemUp")
+	public String sortUp(Item item, Model viewModel,Principal principal) {
+		String username = principal.getName();
+		viewModel.addAttribute("user", uService.findByUsername(username));
+		viewModel.addAttribute("allItems",this.iService.sortAsc(item));
+		
+		return "dashboard.jsp";
+	}
+	
+	//Sort By Item Descending
+	@GetMapping("/sort/itemDown")
+	public String sortDown(Item item, Model viewModel,Principal principal) {
+		String username=principal.getName();
+		viewModel.addAttribute("user", uService.findByUsername(username));
+		viewModel.addAttribute("allItems",this.iService.sortDesc(item));
+		return "/dashboard.jsp";
+	}
+
+	//Sort By Admin Item Ascending
+	@GetMapping("/admin/itemUp")
+	public String adminSortUp(Item item, Model viewModel,Principal principal) {
+		String username = principal.getName();
+		viewModel.addAttribute("user", uService.findByUsername(username));
+		viewModel.addAttribute("allItems",this.iService.sortAsc(item));
+		
+		return "/admin.jsp";
+	}
+	
+	//Sort By Admin Item Descending
+	@GetMapping("/admin/itemDown")
+	public String adminSortDown(Item item, Model viewModel,Principal principal) {
+		String username=principal.getName();
+		viewModel.addAttribute("user", uService.findByUsername(username));
+		viewModel.addAttribute("allItems",this.iService.sortDesc(item));
+		return "/admin.jsp";
+	}
+
 	//Like Item
 	@GetMapping("/like/{id}")
 	public String like(@PathVariable("id") Long id, Principal principal) {
@@ -104,6 +145,27 @@ public class HomeController {
 		this.iService.unlikeItem(userToLikeItem, itemToLike);
 		return "redirect:/dashboard";
 	}
+	//Sort By Likes Ascending
+		@GetMapping("/sort/LikesUp")
+		public String sortLikersUp(Item item, Model viewModel,Principal principal) {
+		String username = principal.getName();
+			viewModel.addAttribute("user", uService.findByUsername(username));
+			viewModel.addAttribute("allItems",this.iService.sortLikesUp(item));
+			return "dashboard.jsp";
+		}
+		
+		//Sort By Likes Descending
+		@GetMapping("/sort/LikesDown")
+		public String sortLikesDown(Item item, Model viewModel,Principal principal) {
+			String username=principal.getName();
+			viewModel.addAttribute("user", uService.findByUsername(username));
+			viewModel.addAttribute("allItems",this.iService.sortLikesDown(item));
+			return "/dashboard.jsp";
+		}
+	
+	
+	
+	
 	//Create Item Page
 	@GetMapping("/admin/addItem")
 	public String addItem(@ModelAttribute("item")Item item,Model viewModel) {
@@ -183,6 +245,43 @@ public class HomeController {
 		return "redirect:/admin/locations";
 	}
 	
+	//Sort By Location Ascending
+	@GetMapping("/sort/locationUp")
+	public String sortLocationUp(Item item, Model viewModel,Principal principal) {
+		String username=principal.getName();
+		viewModel.addAttribute("user", uService.findByUsername(username));
+		viewModel.addAttribute("allItems",this.iService.locationUp(item));
+		return "dashboard.jsp";
+	}
+	
+	//Sort By Location Descending
+	@GetMapping("/sort/locationDown")
+	public String sortLocationDown(Item item, Model viewModel,Principal principal) {
+		String username=principal.getName();
+		viewModel.addAttribute("user", uService.findByUsername(username));
+		viewModel.addAttribute("allItems",this.iService.locationDown(item));
+		return "/dashboard.jsp";
+	}
+
+	//Sort By Location Ascending
+	@GetMapping("/admin/locationUp")
+	public String adminSortLocationUp(Item item, Model viewModel,Principal principal) {
+		String username=principal.getName();
+		viewModel.addAttribute("user", uService.findByUsername(username));
+		viewModel.addAttribute("allItems",this.iService.locationUp(item));
+		return "/admin.jsp";
+	}
+	
+	//Sort By Location Descending
+	@GetMapping("/admin/locationDown")
+	public String adminSortLocationDown(Item item, Model viewModel,Principal principal) {
+		String username=principal.getName();
+		viewModel.addAttribute("user", uService.findByUsername(username));
+		viewModel.addAttribute("allItems",this.iService.locationDown(item));
+		return "/admin.jsp";
+	}
+
+	
 	//Details Page
 	@GetMapping("/details/{id}")
 	public String ItemDetails(@PathVariable("id")Long id, @ModelAttribute("item")Item item,@ModelAttribute("comment")Comment comment,@ModelAttribute("pic")Picture pic,Model viewModel) {
@@ -213,5 +312,37 @@ public class HomeController {
 	public String deleteItem(@PathVariable("id")Long id) {
 		this.iService.deleteItem(id);
 		return "redirect:/admin";
+	}
+	
+	// List of Registered Users (Admin Only)
+	@GetMapping("/admin/users")
+	public String listOfUsers(User user, Model viewModel) {
+		viewModel.addAttribute("allUsers", this.uService.getAllUsers());
+		return "/admin/allUsers.jsp";
+	}
+	
+	//Sort By Location Ascending
+	@GetMapping("/admin/userNameUp")
+	public String adminSortUserUp(User user, Model viewModel) {
+		viewModel.addAttribute("allUsers",this.uService.sortAsc(user));
+		
+		return "/admin/allUsers.jsp";
+		
+	}
+	
+	//Sort By Location Descending
+	@GetMapping("/admin/userNameDown")
+	public String adminSortUserDown(User user, Model viewModel) {
+		viewModel.addAttribute("allUsers",this.uService.sortDesc(user));
+		
+		return "/admin/allUsers.jsp";
+	}
+
+	
+	//Delete a User
+	@GetMapping("/deleteUser/{id}")
+	public String deleteUser(@PathVariable("id")Long id) {
+		this.uService.deleteUser(id);
+		return "redirect:/admin/users";
 	}
 }

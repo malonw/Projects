@@ -10,37 +10,34 @@
 <link rel="stylesheet" type="text/css" href="/css/style.css">
 
 </head>
-<body class ="AdminHome">
+<body class ="users">
 <header>
 	<form id="logoutForm" method="POST" action="/logout">
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <input type="submit" value="Logout!" />
     </form>
-    <a href="/admin/addItem">Add an Item</a>
-    <a href="/admin/locations">Add Location</a>
-    <a href="/dashboard">Dashboard</a>
-    <a href ="/admin/users">List of Registered Users</a>
+    <a href="/admin">Admin Dashboard</a>
+
 </header>
 <div class ="container">
-    <h1>Welcome, ${user.username}</h1>
+    <h1>Welcome, Admin</h1>
     <hr>
     <table class ="table table-striped table-light table-bordered">
     	<thead>
     		<tr>
-    			<th>Number of Likes</th>
-   				<th class="th-sm">Item Name  <a class= "btn btn-light" href="/admin/itemUp" ><span>&#8607;</span></a><a class="btn btn-light" href="/admin/itemDown"> <span>&#8609;</span></a></th>
-    			<th>Item Location  <a class= "btn btn-light" href="/admin/locationUp" ><span>&#8607;</span></a><a class="btn btn-light" href="/admin/locationDown"> <span>&#8609;</span></a></th>
+
+   				<th class="th-sm">Username  <a class= "btn btn-light" href="/admin/userNameUp" ><span>&#8607;</span></a><a class="btn btn-light" href="/admin/userNameDown"> <span>&#8609;</span></a></th>
+    			<th>Created Date</th>
     			<th>Action</th>
    	
     		</tr>
     	</thead>
     	<tbody>
-    	<c:forEach items="${allItems}" var="item">
+    	<c:forEach items="${allUsers}" var="user">
     		<tr>
-    			<td>${item.likers.size()}</td>
-    			<td><a href="/details/${item.id}">${item.name}</a></td>
-    			<td>${item.roomItemIsIn.name}</td>
-    			<td><a href="/admin/editItem/${item.id}">Edit</a> | <a href="/delete/${item.id}">Delete</a></td>
+    			<td>${user.username}</td>
+    			<td>${user.createdAt}</td>
+    			<td><a href="/deleteUser/${user.id}">Delete</a></td>
     						
     		</tr>	
     	</c:forEach>

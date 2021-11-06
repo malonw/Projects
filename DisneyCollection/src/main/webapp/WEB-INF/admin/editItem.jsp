@@ -13,13 +13,15 @@
 
 <title>Edit an Item</title>
 </head>
-<body>
+<body class="editItem">
 <header><a href="/admin/">Admin Home Page</a>
 <a href="/dashboard">User Home Page</a>
 </header>
 <div class="container">
 <h1>Edit an Item</h1>
 <hr>
+<div class="row">
+<div class="col-md-6">
 	<div class="form-group">
 		<form:form method ="POST" action="/admin/edit/${item.id}" modelAttribute="item">
 			<div class="form-control">
@@ -50,6 +52,9 @@
 			<button class="btn btn-success">Edit Item</button>
 		</form:form>
 		<hr>
+	</div>
+</div>
+	<div class="col-md-6">
 		<h3>Upload a picture</h3>
 		<p>${message}</p>
 			<form method = "POST" action = "/admin/upload/${item.id}" enctype="multipart/form-data">
@@ -61,6 +66,7 @@
 			<button class="btn btn-primary">Upload Image</button>
 			</form>
 	</div>
+</div>
 </div>
 </body>
 </html>

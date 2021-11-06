@@ -12,69 +12,67 @@
 <link rel="stylesheet" type="text/css" href="/css/style.css">
 
 </head>
-<body >
-<header>
-	<a href="/dashboard">Dashboard</a>
-	<form id="logoutForm" method="POST" action="/logout">
-        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        <input type="submit" value="Logout!" />
-    </form>
-    <a href="/admin/">Admin Home Page</a>
-    
-</header>
+<body class="ItemDetails">
+	<header>
+		<a href="/dashboard">Dashboard</a>
+		<form id="logoutForm" method="POST" action="/logout">
+	        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+	        <input type="submit" value="Logout!" />
+	    </form>
+	    <a href="/admin/">Admin Home Page</a>
+	    
+	</header>
 <hr>
 <div class="container">
 	<div class="details">
 		<img src="/images/DisneyCastleLogo.jpeg" height="10%" width="10%"/>
 		
 		<div>
-	<h2>${item.name}</h2>
+			<h2>${item.name}</h2>
 	 
-		<p><label>Description:</label>
-			${item.description}</p>
-		<p><label>Value: </label>
-			<fmt:formatNumber value="${item.value}" type="currency"/></p>
+			<p><label><b>Description:</b></label>
+				${item.description}</p>
+			<p><label><b>Value: </b></label>
+				<fmt:formatNumber value="${item.value}" type="currency"/></p>
+		</div>
 	</div>
-	</div>
-				
-	<div class="imagePlace">
-	<h5>Images</h5>
-	<c:forEach items="${allPics}" var="all">
-		<img src="${all.image_url}" class="rounded mx-auto d-block" alt="image of ${item.name}" height="75%" width="75%"/>
-	<hr>
-	</c:forEach>
-	</div>
-<hr>
-		<h4>Liked By</h4>
-	<ul>
-		<c:forEach items="${item.likers}" var="user">
-			<li>${user.username}</li>
-		</c:forEach>
-	</ul>
-<hr>
-
-			<h4>Add a Comment</h4>
+	<div class="row">		
+		<div class="imagePlace">
+			<h5>Images</h5>
+			<c:forEach items="${allPics}" var="all">
+				<img src="${all.image_url}" class="rounded mx-auto d-block" alt="image of ${item.name}" height="75%" width="75%"/>
 			<hr>
-			<div class="mb-3">
-		<form:form action="/addComment/${item.id}" method= "POST" modelAttribute="comment">
-			<form:label path="comments" class="form-label">Comment Here:</form:label>
-			<form:errors path="comments"/>
-			<form:textarea path="comments" class="form-control"/>
-			<button class="btn btn-success">Submit</button>
-		
-		</form:form>
-	</div>
-<hr>
-
-<h4>Comments</h4>
-	<div class="comments">
-	
-	<c:forEach items="${item.comments}" var="all">
-		<p>${all.author.username} states:
-			${all.comments}</p>
+			</c:forEach>
+		</div>
 			<hr>
-	</c:forEach>
-	
+			<h4>Liked By</h4>
+		<ul>
+			<c:forEach items="${item.likers}" var="user">
+				<li>${user.username}</li>
+			</c:forEach>
+		</ul>
+	</div>	
+<hr>
+	<div class="row">
+		<div class="col-md-6">
+				<h4>Add a Comment</h4>
+				<form:form action="/addComment/${item.id}" method= "POST" modelAttribute="comment">
+					<form:label path="comments" class="form-label">Comment Here:</form:label>
+					<form:errors path="comments"/>
+					<form:textarea path="comments" class="form-control"/>
+					<button class="btn btn-success">Submit</button>
+				</form:form>
+		</div>
+		<div class="col-md-6">
+			<h4>Comments</h4>
+			<div class="comments">
+				<c:forEach items="${item.comments}" var="all">
+					<p>${all.author.username} states:
+						${all.comments}</p>
+						<hr>
+				</c:forEach>
+			</div>
+		</div>
 	</div>
 </div>
 </body>

@@ -48,4 +48,34 @@ public class ItemService {
 		usersWhoLiked.remove(user);
 		this.iRepo.save(item);
 	}
+	//Sort Item Name Up
+	public List<Item> sortAsc(Item item) {
+		return this.iRepo.findByOrderByNameAsc();
+	}
+	
+	//Sort Item Name Down
+	public List<Item> sortDesc(Item item) {
+		return this.iRepo.findByOrderByNameDesc();
+	}
+
+	//Sort By Likes Up
+	public List<Item> sortLikesUp(Item item){
+		return this.iRepo.findByOrderByLikersAsc();
+	}
+	//Sort By Likes Down
+	public List<Item> sortLikesDown(Item item){
+
+//		Below Does not work
+//		return this.iRepo.findAllByOrderByAllLikersDesc(); 
+		return this.iRepo.findByOrderByLikersDesc();
+	}
+	//Sort By Likes Up
+	public List<Item> locationUp(Item item){
+		return this.iRepo.findByOrderByRoomItemIsInAsc();
+	}
+	//Sort By Likes Down
+	public List<Item> locationDown(Item item){
+		return this.iRepo.findByOrderByRoomItemIsInDesc();
+	}
+
 }
